@@ -1,7 +1,7 @@
 Option Explicit
 
 Function funAddColumnHeader(ByVal columnHeader As String, ByVal headerRow As Long)
-
+    ' Adds column header to the right of all other columns
     Dim getPosition As Range
 
     Set getPosition = modFunctions.getRangeWhole(columnHeader, ActiveSheet) 'ActiveSheet.Cells.Find(what:=columnHeader, after:=Range("A1"), lookat:=xlWhole, SearchDirection:=xlNext)
@@ -23,7 +23,8 @@ Function funAddColumnHeader(ByVal columnHeader As String, ByVal headerRow As Lon
 End Function
 
 Function funLoopThroughRows(targetSheet As Worksheet, columnLetter As String, rowNumber As Long) As Range
-
+    'Iterate through visible rows
+    
     Dim thisRange As Range
 
     Set thisRange = targetSheet.Range(columnLetter & rowNumber)
@@ -50,6 +51,8 @@ End Function
 
 Sub subLaunchChrome(Optional navigatePath As String)
 
+    ' Launches Chrome and navigates to passed path
+            
     If navigatePath = Empty Then
     
         navigatePath = ""
@@ -66,6 +69,8 @@ End Sub
 
 Function funGetWorksheetByRange(findString As String, targetWorkbook As Workbook) As Worksheet
 
+    ' 
+            
     Dim currentSheet As Worksheet
 
     For Each currentSheet In targetWorkbook.Worksheets
@@ -88,6 +93,8 @@ End Function
 
 Function funOpenNewestFile(strFolder As String, fileQualifyer As String, Optional relativeToWhatDate As Date)
 
+    ' Open the newest file in a path
+                
     If relativeToWhatDate = "12:00:00 AM" Then
     
         relativeToWhatDate = Date
@@ -202,6 +209,8 @@ End Function
 
 Sub funApplyAutofilterToSheet(sheetThatNeedsAFilter As Worksheet, headerRow As Long, Optional lastRow As Long)
 
+    ' Applies Autofilter to worksheet
+                    
     If Not sheetThatNeedsAFilter.AutoFilter Is Nothing Then
     
         sheetThatNeedsAFilter.AutoFilterMode = False
@@ -222,44 +231,10 @@ Sub funApplyAutofilterToSheet(sheetThatNeedsAFilter As Worksheet, headerRow As L
     
 End Sub                
 
-Function dateForShamrock(Optional inputDate As Date)
-
-    If inputDate <> 0 Then
-
-        dateForShamrock = inputDate
-
-    Else
-
-        dateForShamrock = Date
-
-    End If
-
-    Dim monthToProcess As String
-
-    monthToProcess = Month(dateForShamrock)
-    
-    If Len(monthToProcess) = 1 Then
-    
-        monthToProcess = "0" & monthToProcess
-    
-    End If
-
-    Dim dayToProcess As String
-
-    dayToProcess = Day(dateForShamrock)
-    
-    If Len(dayToProcess) = 1 Then
-    
-        dayToProcess = "0" & dayToProcess
-    
-    End If
-
-    dateForShamrock = Year(dateForShamrock) & "." & monthToProcess & "." & dayToProcess
-
-End Function                
-
 Function returnToWindow(windowIndex As Long)
 
+    ' If window changes, this can return to the previous window on passed index 
+                    
     ActiveWindow.ActivatePrevious
 
     Do Until ActiveWindow.WindowNumber = windowIndex
@@ -272,6 +247,8 @@ End Function
 
 Function getColumnLetter(findString As String, currentSheet As Worksheet, Optional headerRow As Long)
 
+    ' Returns column letter by header string
+                    
     Dim getPosition As Range
 
     If headerRow = 0 Then
@@ -298,6 +275,8 @@ End Function
                         
 Function getColumnNumber(findString As String, currentSheet As Worksheet, Optional headerRow As Long)
 
+    ' Returns column index by pass header string
+                            
     Dim getPosition As Range
 
     If headerRow = 0 Then
@@ -324,6 +303,8 @@ End Function
                                 
 Function getColumnLetterPart(findString As String, currentSheet As Worksheet)
 
+    ' Returns column letter by partial header string match
+                                    
     Dim getPosition As Range
 
     Set getPosition = currentSheet.Cells.Find(What:=findString, After:=currentSheet.Range("A1"), LookAt:=xlPart, SearchDirection:=xlNext)
