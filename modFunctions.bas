@@ -323,6 +323,8 @@ End Function
 
 Function getRangePart(findString As String, currentSheet As Worksheet, Optional withinRange As Range, Optional afterRange As Range) As Range
 
+    ' Returns range if partial match to search string                                    
+                                        
     Dim getPosition As Range
 
     If withinRange Is Nothing And afterRange Is Nothing Then
@@ -353,6 +355,8 @@ End Function
 
 Function getRangeWhole(findString As String, currentSheet As Worksheet, Optional withinRange As Range, Optional afterRange As Range) As Range
 
+    ' Returns range if exact match to search string             
+                                                                
     Dim getPosition As Range
 
     If Len(findString) <= 255 Then
@@ -383,6 +387,8 @@ End Function
 
 Function getColumnHeaderRow(findString As String, currentSheet As Worksheet)
 
+    ' Returns header row based on search string
+                                                                                    
     If findString = "" Then
 
         getColumnHeaderRow = 1
@@ -409,6 +415,8 @@ End Function
                 
 Function getLastRow(currentSheet As Worksheet)
 
+    ' Returns last row
+                                                                                        
     Dim getPosition As Range
 
     Set getPosition = currentSheet.Cells.Find("*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious)
@@ -512,6 +520,8 @@ End Function
                                                                                                                         
 Function getLastColumnLetter(currentSheet As Worksheet, Optional headerRow As Long)
 
+    ' Returns last column letter
+                                                                                                                            
     ''' Find All
     
     Dim getPosition As Range
@@ -597,6 +607,8 @@ Function getLastColumnLetter(currentSheet As Worksheet, Optional headerRow As Lo
 End Function
 
 Function getLastColumnNumber(currentSheet As Worksheet, Optional headerRow As Long)
+
+    ' Returns last column as number/index   
 
     ''' Find All
     
@@ -686,6 +698,8 @@ End Function
 
 Function isAlpha(str As String) As Boolean
  
+    ' Returns Boolean if string
+ 
     Dim Flag As Boolean
     
     Flag = True
@@ -717,6 +731,8 @@ End Function
 
 Function getColumnLetterCreateIfMissing(lookForString As String, headerRow As Long, currentSheet As Worksheet)
 
+    ' Returns column letter if found, creates column header if not but will still retun the column header
+
     Dim getPosition As Range
     
     Set getPosition = modFunctions.getRangeWhole(lookForString, currentSheet)
@@ -744,6 +760,8 @@ Function getColumnLetterCreateIfMissing(lookForString As String, headerRow As Lo
 End Function
 
 Function getWorkbook(nameOfWorkbookToGet As String) As Workbook
+    
+    ' Returns Workbook on name of workbook
     
     If InStr(nameOfWorkbookToGet, """") > 0 Then
     
@@ -774,6 +792,8 @@ Function getWorkbook(nameOfWorkbookToGet As String) As Workbook
 End Function
 
 Function getWorksheet(nameOfWorksheetToGet As String, Optional withinWorkbook As Workbook) As Worksheet
+
+    ' Returns Worksheet on name of worksheet
 
     If withinWorkbook Is Nothing Then
     
@@ -806,6 +826,8 @@ Function getWorksheet(nameOfWorksheetToGet As String, Optional withinWorkbook As
 End Function
 
 Function indexOf(searchString As String, arrayToSearchIn As Variant) As Long
+
+    ' Returns index of substring in string
 
     Dim foundSomething As Boolean
     
@@ -845,6 +867,8 @@ End Function
 
 Sub subOpenFolderLocation(strDirectory As String)
 
+    ' Launches and navigates to path using Folder Explorer
+
     ''' Open folder destination
     
     Dim pID As Variant
@@ -852,8 +876,6 @@ Sub subOpenFolderLocation(strDirectory As String)
 '    Dim strDirectory As String
     Dim w As Object
     Dim thisPath As String
-    
-'    strDirectory = "\\DATA.SHAMROCKFOODS.COM\UDRIVE\" & Environ("UserName") & "\Desktop"
     
     strDirectory = UCase(strDirectory)
     
@@ -892,6 +914,8 @@ End Sub
 
 Sub subUnhideALL()
 
+    ' Shows all hidden cells, if autofilter, clears the filter but doesn't remove it
+
     ActiveSheet.Cells.EntireRow.Hidden = False
     
     ActiveSheet.Cells.EntireColumn.Hidden = False
@@ -905,6 +929,8 @@ Sub subUnhideALL()
 End Sub
 
 Sub subVisibleToHyperlink(Optional startRange As Range)
+
+    ' Convert visible cells in column to hyperlinks starting at the selected cell and moves down to last row
 
     If startRange Is Nothing Then
     
@@ -990,6 +1016,8 @@ Sub subVisibleToHyperlink(Optional startRange As Range)
 End Sub
 
 Public Function CONCATENATEMULTIPLE(Ref As Range, Separator As String) As String
+    
+    ' Concatenate on selection
     
     Dim Cell As Range
     
